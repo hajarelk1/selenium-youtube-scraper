@@ -13,19 +13,21 @@ def get_driver():
 
   return driver
 
+
+def get_videos(driver):
+  video_div_tag='ytd-video-renderer'
+  driver.get(youtube_trending_url)
+  videos=driver.find_elements(By.TAG_NAME,video_div_tag)
+  return videos
+
+  
 if __name__=="__main__":
   print("creating the driver")
   driver=get_driver()
+  print('fetching trending videos')
+  videos=get_videos(driver)
 
-  print('fetching the page')
-  driver.get(youtube_trending_url)
-
-  print('get the video divs')
-  video_div_class='ytd-video-renderer'
-  video_divs=driver.find_elements(By.CLASS_NAME,video_div_class)
-
-
-  print(f'found {len(video_divs)} videos')
+  print(f'found {len(videos)} videos')
   
 
 #
